@@ -1,3 +1,4 @@
+#include "config.h"
 #include "blinkingLEDs.c";
 int LED1 = 7;
 int LED2 = 8;
