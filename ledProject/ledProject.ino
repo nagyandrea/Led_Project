@@ -1,5 +1,4 @@
 extern "C"{
-   #include "sos_led.h"
    #include "led_handler.h"
    #include "switch_handler.h"
  }
@@ -32,7 +31,7 @@ void loop() {
   if(EN)
   {
 #ifdef AGOSDAHU
-    sos_ledBlink();
+    
 #ifdef VEZSBAHU
 
 #ifdef KURDBOHU
