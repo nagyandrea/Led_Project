@@ -1,6 +1,7 @@
 extern "C"{
    #include "led_handler.h"
    #include "switch_handler.h"
+   #include "sos_led.h"
  }
 
  SW_STATUS_t sw = {RELEASED, RELEASED};
@@ -31,7 +32,7 @@ void loop() {
   if(EN)
   {
 #ifdef AGOSDAHU
-    
+    sos_ledBlink();
 #ifdef VEZSBAHU
 
 #ifdef KURDBOHU
