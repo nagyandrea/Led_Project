@@ -1,7 +1,5 @@
-extern "C"{
-   #include "led_handler.h"
-   #include "switch_handler.h"
- }
+#include "led_handler.h"
+#include "switch_handler.h"
 
  SW_STATUS_t sw = {RELEASED, RELEASED};
   
@@ -32,17 +30,17 @@ void loop() {
   {
 #ifdef AGOSDAHU
     
-#ifdef VEZSBAHU
+#elif VEZSBAHU
 
-#ifdef KURDBOHU
+#elif KURDBOHU
+    kurdbohu_loop(sw);
+#elif DANIGEHU
 
-#ifdef DANIGEHU
+#elif NAGYKAHU
 
-#ifdef NAGYKAHU
+#elif NAGYANHU
 
-#ifdef NAGYANHU
-
-#ifdef KISSKAHU
+#elif KISSKAHU
 
 #endif
   }
