@@ -1,6 +1,6 @@
 #include "led_handler.h"
 
-static LED_STATUS_t ledState[] =
+static LED_STATUS_t ledStates[] =
 {
    {LED0, LOW},
    {LED1, LOW}, 
@@ -27,18 +27,60 @@ void LedInit(void)
     digitalWrite(LED5, LOW);
 }
 
-int readtLedValue(int ledNumber)
+static int GetLed(int ledPin)
 {
-    return(ledState[ledNumber].value);
+    int led = -1;
+    int i, n;
+    
+    for(i=0, n=sizeof(ledStates); i<n; i++)
+    {
+        if (ledStates[i].pin == ledPin)
+        {
+            led = i;
+            break;
+        }
+    }
+
+    return(led);
 }
 
-void WriteLed(int ledNumber, int newState)
+int GetLedValue(int ledPin)
 {
-    if (ledNumber >= 0 && 
-        ledNumber < sizeof(ledState))
+    int ledValue = -1;
+    int led      = -1;
+    int i, n;
+    
+    led = GetLed(ledPin);
+    if (led != -1)
     {
-        digitalWrite(ledState[ledNumber].pin, newState);
-        ledState[ledNumber].value = newState;
-        
+        ledValue = ledStates[led].value;
+    }
+    
+    return(ledValue);
+}
+
+void WriteLed(int ledPin, int newState)
+{
+    int led = -1;
+
+    led = GetLed(ledPin);
+    if (led != -1)
+    {
+        ledStates[led].value = newState;
+        digitalWrite(ledPin, newState);
+    }
+}
+
+void SwitchLedState(int ledPin)
+{
+    int led         = -1;
+    int newLedState = -1;
+
+    led = GetLed(ledPin);
+    if (led != -1)
+    {
+        newLedState          = (ledStates[led].value == LOW) ? HIGH : LOW;
+        ledStates[led].value = newLedState;
+        digitalWrite(ledPin, newLedState);
     }
 }
